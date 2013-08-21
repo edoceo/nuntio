@@ -57,54 +57,55 @@ nuntio.poll = function() {
 		data:{
 			room:this.room,
 			line:nuntio.line_id
-		},
-		success:function(res,ret,xhr) {
+	}})
+	.done(function(res,ret,xhr) {
 			// console.log('nuntio.poll().ajax().success()');
 			nuntio.recv(res,ret,xhr);
-		},
-		error:function(xhr,ret,err) {
+	})
+	.fail(function(xhr,ret,err) {
 			// console.log('nuntio.poll().ajax().error()');
 			nuntio.mode = 'error';
 			nuntio.error_count++;
 			nuntio.stat('fail',ret + '; ' + err);
 			// $('.chat-stat').html('Connection Error:' + nuntio.error_count + ' #' + this.readyState + '/' + e.eventPhase);
-		},
-		complete:function() {
-			// console.log('nuntio.poll().ajax().complete()');
-			if (nuntio.tick) clearTimeout(nuntio.tick);
-			nuntio.tick = setTimeout(nuntio.poll,1234);
-		}
+	})
+	.always(function() {
+		// console.log('nuntio.poll().ajax().complete()');
+		if (nuntio.tick) clearTimeout(nuntio.tick);
+		nuntio.tick = setTimeout(nuntio.poll,1234);
 	});
+};
 
-	// $('#chat-list').append('<div class="chat-line" id="l' + l + '">' + e.data + '</div>');
-	// $('#chat-list').append('<div class="chat-line">' + $('#chat-list').scrollTop() + '</div>');
-	// $('#chat-list').append('<div class="chat-line">' + parseInt($('#chat-list').scrollTop()) + ' of ' + $('#chat-list').height() + '</div>');
+// $('#chat-list').append('<div class="chat-line" id="l' + l + '">' + e.data + '</div>');
+// $('#chat-list').append('<div class="chat-line">' + $('#chat-list').scrollTop() + '</div>');
+// $('#chat-list').append('<div class="chat-line">' + parseInt($('#chat-list').scrollTop()) + ' of ' + $('#chat-list').height() + '</div>');
 
-	// Failed
-	// var x = $('#chat-list .chat-line:last').position();
-	// $('#chat-list').scrollTop(x.top);
-	// Also Failed
-	// document.getElementById('l' + l).scrollIntoView();
-	// $('#chat-list').scrollTop( parseInt($('#chat-list').scrollTop()) );
-}
+// Failed
+// var x = $('#chat-list .chat-line:last').position();
+// $('#chat-list').scrollTop(x.top);
+// Also Failed
+// document.getElementById('l' + l).scrollIntoView();
+// $('#chat-list').scrollTop( parseInt($('#chat-list').scrollTop()) );
 
 /**
 
 */
-nuntio.recv = function(res,ret,xhr) {
-
+nuntio.recv = function(res,ret,xhr)
+{
+	console.log('nuntio.recv(' + res + ', ' + ret + ', ' + xhr + ')');
 	nuntio.stat('warn','<i class="icon-comment" title="recv()"></i>');
 	$('#chat-foot input').attr('disabled',false);
 
-	// no res? bail
+	// Check Response
 	if ('undefined' == typeof res) return;
 	// res has list, then use that
-	if ('undefined' != typeof res.list) res = res.list;
+	if ('undefined' == typeof res.list) return;
+	if (null == res.list) return;
 
-	var c = res.length;
+	var c = parseInt(res.list.length) || 0;
 	for (var i = 0; i<c; i++) {
 
-		var line = res[i];
+		var line = res.list[i];
 
 		$('#chat-list').append('<div class="chat-line" id="l' + line._id + '">[' + line.time + '] ' + line.text + '</div>');
 		var x = document.getElementById('chat-list');
