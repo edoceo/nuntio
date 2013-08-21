@@ -1,6 +1,6 @@
 nuntio.open = function()
 {
-	nuntio.stat('info','Connected');
+	nuntio.stat('info','<i class="icon-comments-alt" title="ready"></i>');
 	$('#chat-foot input').focus();
 
 	// var arg = {
@@ -30,8 +30,9 @@ nuntio.join = function(n)
 			switch (e.keyCode) {
 			case 13:
 				// Submit Text
-				nuntio.send($('#chat-foot input').val());
-				$('#chat-foot input').val('');
+				var x = $('#chat-foot input');
+				nuntio.send(x.val());
+				x.val('');
 				break;
 			}
 		}
@@ -69,8 +70,8 @@ nuntio.poll = function() {
 			// $('.chat-stat').html('Connection Error:' + nuntio.error_count + ' #' + this.readyState + '/' + e.eventPhase);
 		},
 		complete:function() {
-			if (nuntio.tick) clearTimeout(nuntio.tick);
 			// console.log('nuntio.poll().ajax().complete()');
+			if (nuntio.tick) clearTimeout(nuntio.tick);
 			nuntio.tick = setTimeout(nuntio.poll,1234);
 		}
 	});
@@ -92,7 +93,8 @@ nuntio.poll = function() {
 */
 nuntio.recv = function(res,ret,xhr) {
 
-	nuntio.stat('info','recv&rlarr;');
+	nuntio.stat('warn','<i class="icon-comment" title="recv()"></i>');
+	$('#chat-foot input').attr('disabled',false);
 
 	// no res? bail
 	if ('undefined' == typeof res) return;
@@ -116,6 +118,7 @@ nuntio.recv = function(res,ret,xhr) {
 		// }
 
 	}
+	nuntio.stat('info','<i class="icon-comments-alt" title="ready"></i>');
 }
 
 /**
@@ -123,7 +126,8 @@ nuntio.recv = function(res,ret,xhr) {
 */
 nuntio.send = function(t)
 {
-	nuntio.stat('info','send&rlarr;');
+	nuntio.stat('good','<i class="icon-comment" title="send()"></i>');
+	$('#chat-foot input').attr('disabled',true);
 
 	switch (t) {
 	case '/wipe':

@@ -21,7 +21,7 @@ nuntio.do_size = function() {
 		width:w - 200,
 		height:h
 	});
-	
+
 	$('#chat-list').css({
 		height:(h - $('#chat-head').height() - $('#chat-foot').height() - 4)
 	});
@@ -35,20 +35,36 @@ nuntio.do_size = function() {
 };
 
 nuntio.stat = function(kind,text) {
+	var se = $('.chat-stat');
+	// se.removeClass('good');
+	// se.removeClass('info');
+	// se.removeClass('warn');
+	se.removeClass('fail');
+	$('#chat-foot input').attr('disabled',false);
+
 	switch (kind) {
 	case 'good':
+		// se.addClass('good');
+		se.css({color:'#5cb85c'});
+		se.html(text);
 		break;
 	case 'info':
-		$('.chat-stat').css({color:'inherit'});
-		$('.chat-stat').html('Connected');
-		$('#chat-foot input').attr('disabled',false);
+		se.css({color:'#357ebd'});
+		se.html(text);
 		break;
 	case 'warn':
+		se.css({color:'#eea236'});
+		se.html(text);
 		break;
 	case 'fail':
-		$('.chat-stat').html('Error:' + text);
-		$('.chat-stat').css({color:'#f00'});
+		se.css({color:'#000'});
+		se.addClass('fail');
+		se.html('Error:' + text);
 		$('#chat-foot input').attr('disabled',true);
+		break;
+	default:
+		se.css({color:'inherit'});
+		se.html(text);
 		break;
 	}
 };
