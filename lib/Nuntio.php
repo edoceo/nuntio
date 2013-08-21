@@ -19,7 +19,7 @@ class Nuntio
 		$q = array('name' => Chat_Room::cleanName($x));
 		if (preg_match('/^[0-9a-f]{24}$/',$x)) {
 			$q = array(
-				'_id' => new MongoId($x),
+				'_id' => new \MongoId($x),
 			);
 		}
 		$r = self::$mdb->find_one('chat_room',$q);
