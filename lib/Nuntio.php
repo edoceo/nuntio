@@ -4,6 +4,8 @@
 	@brief Nuntio Application Helper
 */
 
+namespace Nuntio;
+
 class Nuntio
 {
 	public static $mdb;
@@ -14,8 +16,8 @@ class Nuntio
 	*/
 	public static function getRoom($x)
 	{
-		$q = array('name' => Chat_Room::cleanName($id));
-		if (preg_match('/^[0-9a-f]{24}$/',$id)) {
+		$q = array('name' => Chat_Room::cleanName($x));
+		if (preg_match('/^[0-9a-f]{24}$/',$x)) {
 			$q = array(
 				'_id' => new MongoId($x),
 			);
