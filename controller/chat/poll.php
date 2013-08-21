@@ -24,7 +24,7 @@ if (!empty($_GET['line'])) {
 $try = 0;
 do {
 
-	$res = $this->mdb->find('chat_line',$q);
+	$res = Nuntio::$mdb->find('chat_line',$q);
 	$res->sort(array('_id' => -1));
 	$res->limit(1);
 
