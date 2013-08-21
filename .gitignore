@@ -1,5 +1,4 @@
 boot.ini
-composer.json
 composer.lock
 composer.phar
 vendor/*
