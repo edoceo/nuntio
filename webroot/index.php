@@ -1,7 +1,7 @@
 <?php
 /**
-    @file
-    @brief Nuntio Front Controller
+	@file
+	@brief Nuntio Front Controller
 */
 
 define('APP_INIT',microtime(true));
