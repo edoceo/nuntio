@@ -22,6 +22,7 @@ if (!empty($_ENV['use-websocket'])) {
 }
 ?>
 <link href="http://radix.edoceo.com/css/radix.css" rel="stylesheet">
+<link href="//gcdn.org/font-awesome/3.2.1/font-awesome.css" rel="stylesheet">
 <link href="/nuntio.css" rel="stylesheet">
 </head>
 
@@ -30,10 +31,22 @@ if (!empty($_ENV['use-websocket'])) {
 <nav>
 <ul>
 <li><a href="/">Nuntio</a></li>
-<li><a href="/~<?php echo $_ENV['room_name']; ?>">~<?php echo $_ENV['room_name']; ?></a></li>
-<li><a href="/~<?php echo $_ENV['room_name']; ?>#task">#task</a></li>
-<li><a href="/~<?php echo $_ENV['room_name']; ?>#policy">#policy</a></li>
-<li><a href="/~<?php echo $_ENV['room_name']; ?>#sop">#sop</a></li>
+<?php
+if (!empty($_ENV['room_name'])) {
+
+	$link = sprintf('~%s',$_ENV['room_name']);
+	echo '<li><a href="/' . $link . '">' . $link . '</a></li>';
+
+	// Room Tags
+	if (!empty($_ENV['room_name'])) {
+		if (is_array($_ENV['room_tags'])) {
+			foreach ($_ENV['room_tags'] as $tag) {
+				echo '<li><a href="/' . $link . '#' . $tag .'">#' . $tag . '</a></li>';
+			}
+		}
+	}
+}
+?>
 </nav>
 </header>
 
