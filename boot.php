@@ -25,7 +25,7 @@ require_once(APP_ROOT . '/vendor/edoceo/radix/Radix/db/mongo.php');
 require_once(APP_ROOT . '/vendor/edoceo/radix/Radix/db/redis.php');
 
 require_once(APP_ROOT . '/lib/Nuntio.php');
-require_once(APP_ROOT . '/lib/Chat.php');
+// require_once(APP_ROOT . '/lib/Chat.php');
 require_once(APP_ROOT . '/lib/Chat_Room.php');
 require_once(APP_ROOT . '/lib/Chat_Line.php');
 
