@@ -54,20 +54,24 @@ nuntio.poll = function() {
 		url:'/chat/poll',
 		timeout:16000,
 		data:{
+			room:this.room,
 			line:nuntio.line_id
 		},
 		success:function(res,ret,xhr) {
+			// console.log('nuntio.poll().ajax().success()');
 			nuntio.recv(res,ret,xhr);
-			nuntio.tick = setTimeout(nuntio.poll,1234);
 		},
 		error:function(xhr,ret,err) {
+			// console.log('nuntio.poll().ajax().error()');
 			nuntio.mode = 'error';
 			nuntio.error_count++;
-			nuntio.stat('fail',err);
+			nuntio.stat('fail',ret + '; ' + err);
 			// $('.chat-stat').html('Connection Error:' + nuntio.error_count + ' #' + this.readyState + '/' + e.eventPhase);
 		},
 		complete:function() {
-			// nuntio.tick = setTimeout(nuntio.poll,1234);
+			if (nuntio.tick) clearTimeout(nuntio.tick);
+			// console.log('nuntio.poll().ajax().complete()');
+			nuntio.tick = setTimeout(nuntio.poll,1234);
 		}
 	});
 
@@ -87,6 +91,9 @@ nuntio.poll = function() {
 
 */
 nuntio.recv = function(res,ret,xhr) {
+
+	nuntio.stat('info','recv&rlarr;');
+
 	// no res? bail
 	if ('undefined' == typeof res) return;
 	// res has list, then use that
@@ -116,6 +123,8 @@ nuntio.recv = function(res,ret,xhr) {
 */
 nuntio.send = function(t)
 {
+	nuntio.stat('info','send&rlarr;');
+
 	switch (t) {
 	case '/wipe':
 		$('#chat-list').empty();
@@ -128,4 +137,3 @@ nuntio.send = function(t)
 
 	$.post('/chat/post',arg,nuntio.recv);
 }
-
