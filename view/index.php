@@ -19,7 +19,7 @@
 <a href="" rel="nofollow">CoMeeting</a>,
 Yammer,
 S?????,
-<a href="https://www.echowaves.com/" rel="nofollow">Echowaves
+<a href="https://www.echowaves.com/" rel="nofollow">Echowaves</a>
 </p>
 
 <h2>Other Remote Communication Tools</h2>
