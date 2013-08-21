@@ -1,3 +1,13 @@
+<?php
+/**
+	@file
+	@brief The Site Home Page
+*/
+
+echo radix::block('social.php');
+
+?>
+
 <h1>Nuntio</h1>
 
 <h2>Latin: announce, report, relate, herald, give forth, intimate authoritatively</h2>
