@@ -24,12 +24,9 @@ require_once(APP_ROOT . '/lib/Chat_Room.php');
 require_once(APP_ROOT . '/lib/Chat_Line.php');
 
 // Load Config
-$_ENV = parse_ini_file(APP_ROOT . '/boot.ini');
-radix\radix_db_mongo::init($_ENV['mongo']);
-radix\radix_db_redis::init($_ENV['redis']);
-
-unset($_ENV['mongo']);
-unset($_ENV['redis']);
+$cfg = parse_ini_file(APP_ROOT . '/boot.ini', true, INI_SCANNER_RAW);
+radix\radix_db_mongo::init($cfg['mongo']);
+radix\radix_db_redis::init($cfg['redis']);
 
 Nuntio::$mdb = new radix\radix_db_mongo();
 
