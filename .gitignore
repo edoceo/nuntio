@@ -2,3 +2,4 @@ boot.ini
 composer.lock
 composer.phar
 vendor/*
+webroot/nuntio.css

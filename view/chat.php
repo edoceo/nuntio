@@ -13,13 +13,15 @@
 		<h1>Nuntio ~<?php echo $_ENV['room_name']; ?></h1>
 		<p>We are building a neat-o Team Media Communication platform.</p>
 	</div>
-	<div class="chat-stat"></div>
+	<div class="chat-stat"><i class="icon-refresh"></i></div>
 	</div>
 	<div id="chat-list">
 		<!-- <div class="chat-line"></div> -->
 	</div>
 	<div id="chat-foot">
-		<input disabled type="text">
+		<div id="chat-foot-text">
+			<input disabled type="text" style="margin:0px;">
+		</div>
 	</div>
 </div>
 
