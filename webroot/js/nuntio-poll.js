@@ -26,13 +26,18 @@ nuntio.join = function(n)
 		chord += (e.ctrlKey ? 'C' : '-');
 		chord += (e.shiftKey ? 'S' : '-');
 		switch (chord) {
-		default:
+		case '-C-':
 			switch (e.keyCode) {
+			case 10:
 			case 13:
 				// Submit Text
 				nuntio.send(nuntio.line.get_clean());
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
 				break;
 			}
+			break;
 		}
 	});
 }
@@ -93,6 +98,7 @@ nuntio.recv = function(res,ret,xhr)
 {
 	console.log('nuntio.recv(' + res + ', ' + ret + ', ' + xhr + ')');
 	nuntio.stat('warn','<i class="icon-comment" title="recv()"></i>');
+	nuntio.line.enable();
 
 	// Check Response
 	if ('undefined' == typeof res) return;
@@ -118,7 +124,6 @@ nuntio.recv = function(res,ret,xhr)
 
 	}
 	nuntio.stat('info','<i class="icon-comments-alt" title="ready"></i>');
-	nuntio.line.enable();
 }
 
 /**

@@ -19,8 +19,8 @@
 		<!-- <div class="chat-line"></div> -->
 	</div>
 	<div id="chat-foot">
-		<div id="chat-foot-text">
-			<textarea disabled type="text" style="margin:0px;"></textarea>
+		<div>
+			<textarea id="chat-foot-text" type="text" style="margin:0px;"></textarea>
 		</div>
 	</div>
 </div>
