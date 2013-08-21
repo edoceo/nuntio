@@ -2,6 +2,8 @@
 /**
 	@file
 	@brief Finds the First Mongo chat_line > this one
+
+	Output is a JSON Array of Lines
 */
 
 namespace Nuntio;
@@ -37,7 +39,11 @@ do {
 			$rec['_id'] = strval($rec['_id']);
 			$ret[] = $rec;
 		}
-		die(json_encode($ret));
+		die(json_encode(array(
+			'code' => 200,
+			'text' => count($ret) . ' new lines',
+			'list' =>$ret
+		)));
 	}
 	$try++;
 	sleep($try);
