@@ -10,7 +10,13 @@ use radix;
 
 error_reporting(-1);
 
+if (!is_file(APP_ROOT . '/vendor/autoload.php')) {
+	header('Content-Type: text/plain');
+	echo "Autoloader not found, add Composer and Update\n";
+	die(file_get_contents(__DIR__ . '/README.md'));
+}
 require_once(APP_ROOT . '/vendor/autoload.php');
+
 require_once(APP_ROOT . '/vendor/edoceo/radix/Radix.php');
 require_once(APP_ROOT . '/vendor/edoceo/radix/Radix/Session.php');
 require_once(APP_ROOT . '/vendor/edoceo/radix/Radix/Filter.php');
