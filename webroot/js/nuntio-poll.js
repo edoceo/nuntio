@@ -11,14 +11,14 @@ nuntio.open = function()
 	//	 x.scrollTop = x.scrollHeight;
 	// });
 
-	this.poll();
+	nuntio.poll();
 }
 
 nuntio.join = function(n)
 {
 	console.log('nuntio.join(' + n + ')');
-	this.room = n;
-	this.open();
+	nuntio.room = n;
+	nuntio.open();
 
 	$('#chat-foot input').on('keypress',function(e) {
 		var chord = '';
@@ -55,9 +55,10 @@ nuntio.poll = function() {
 		url:'/chat/poll',
 		timeout:16000,
 		data:{
-			room:this.room,
+			room:nuntio.room,
 			line:nuntio.line_id
-	}})
+		}
+	})
 	.done(function(res,ret,xhr) {
 			// console.log('nuntio.poll().ajax().success()');
 			nuntio.recv(res,ret,xhr);
@@ -136,7 +137,7 @@ nuntio.send = function(t)
 		return;
 	}
 	var arg = {
-		room:this.room,
+		room:nuntio.room,
 		text:t
 	};
 
