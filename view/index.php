@@ -2,7 +2,7 @@
 
 <h2>Latin: announce, report, relate, herald, give forth, intimate authoritatively</h2>
 <p>We are building a neat-o Team Media Communication platform.</p>
-                             
+
 <form action="/chat/join" method="post">
 <input name="user" placeholder="username (email)" type="text">
 <input name="room" placeholder="room" type="text">
