@@ -13,7 +13,6 @@ error_reporting((E_ALL | E_STRICT) ^ E_NOTICE);
 
 $info = array();
 $info[] = radix::init(); // Good
-radix::$view->mdb = new radix\radix_db_mongo();
 $info[] = radix::route('~(?<room>\w{3,32})','/chat');
 $info[] = radix::route('~(?<room>\w{3,32})/post','/chat/post');
 $info[] = radix::route('~(?<room>\w{3,32})/hook/(\w+)','/hook/$2');

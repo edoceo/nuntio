@@ -31,9 +31,9 @@ require_once(APP_ROOT . '/lib/Chat_Line.php');
 
 // Load Config
 $cfg = parse_ini_file(APP_ROOT . '/boot.ini', true, INI_SCANNER_RAW);
-radix\radix_db_mongo::init($cfg['mongo']);
+\radix_db_mongo::init($cfg['mongo']);
 radix\radix_db_redis::init($cfg['redis']);
 
-Nuntio::$mdb = new radix\radix_db_mongo();
+Nuntio::$mdb = new \radix_db_mongo();
 
 function html($x) { return htmlspecialchars($x,ENT_QUOTES,'utf-8',false); }
