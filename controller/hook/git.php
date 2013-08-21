@@ -1,5 +1,7 @@
 <?php
 /**
+	Specify this Hook as http://nunt.io/hook/git?room=ROOM_ID
+
 	Git Hook
 	github, gitorious, bitbucket
 
@@ -8,7 +10,6 @@
 */
 
 namespace Nuntio;
-use Exception;
 
 $room = Nuntio::getRoom($_GET['room']);
 if (empty($room['_id'])) {
@@ -50,10 +51,10 @@ if (count($buf)) $msg['text'].= 'Removed: ' . implode(', ',$buf);
 
 Nuntio::$mdb->insert('chat_line',$msg);
 
+header('HTTP/1.1 201 Created');
 header('Content-Type: application/json');
 
 die(json_encode(array(
 	'code' => 201,
 	'text' => 'Message Created',
-	'list' => $line_list,
 )));
