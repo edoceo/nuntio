@@ -1,7 +1,7 @@
 nuntio.open = function()
 {
 	nuntio.stat('info','<i class="icon-comments-alt" title="ready"></i>');
-	$('#chat-foot input').focus();
+	nuntio.line.focus();
 
 	// var arg = {
 	//	 room:this.room
@@ -20,7 +20,7 @@ nuntio.join = function(n)
 	nuntio.room = n;
 	nuntio.open();
 
-	$('#chat-foot input').on('keypress',function(e) {
+	$('#chat-foot textarea').on('keypress',function(e) {
 		var chord = '';
 		chord += (e.altKey ? 'A' : '-');
 		chord += (e.ctrlKey ? 'C' : '-');
@@ -30,9 +30,7 @@ nuntio.join = function(n)
 			switch (e.keyCode) {
 			case 13:
 				// Submit Text
-				var x = $('#chat-foot input');
-				nuntio.send(x.val());
-				x.val('');
+				nuntio.send(nuntio.line.get_clean());
 				break;
 			}
 		}
@@ -95,7 +93,6 @@ nuntio.recv = function(res,ret,xhr)
 {
 	console.log('nuntio.recv(' + res + ', ' + ret + ', ' + xhr + ')');
 	nuntio.stat('warn','<i class="icon-comment" title="recv()"></i>');
-	$('#chat-foot input').attr('disabled',false);
 
 	// Check Response
 	if ('undefined' == typeof res) return;
@@ -121,6 +118,7 @@ nuntio.recv = function(res,ret,xhr)
 
 	}
 	nuntio.stat('info','<i class="icon-comments-alt" title="ready"></i>');
+	nuntio.line.enable();
 }
 
 /**
@@ -129,7 +127,7 @@ nuntio.recv = function(res,ret,xhr)
 nuntio.send = function(t)
 {
 	nuntio.stat('good','<i class="icon-comment" title="send()"></i>');
-	$('#chat-foot input').attr('disabled',true);
+	nuntio.line.disable();
 
 	switch (t) {
 	case '/wipe':

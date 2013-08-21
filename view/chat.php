@@ -20,7 +20,7 @@
 	</div>
 	<div id="chat-foot">
 		<div id="chat-foot-text">
-			<input disabled type="text" style="margin:0px;">
+			<textarea disabled type="text" style="margin:0px;"></textarea>
 		</div>
 	</div>
 </div>
