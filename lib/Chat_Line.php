@@ -23,9 +23,14 @@ class Chat_Line
 		// * become <strong>
 		$line = preg_replace('/\s\*(.+?)\*\s/',' <strong>*$1*</strong> ',$line);
 
+		$line = nl2br($line);
+
 		return $line;
 	}
 
+	/**
+		Find and Convert Links
+	*/
 	private static function _link($text)
 	{
 		if (preg_match_all('|\b(https?://[^ ]+)|',$text,$m)) {
@@ -40,9 +45,9 @@ class Chat_Line
 				// Handle Trailing Puncuation
 				if (preg_match('/([\.\+\'\"])$/',$uri,$m)) {
 					$uri = substr($uri,0,-1);
-					$rep = '<a href="' . $uri . '">' . preg_replace('|^https?://|',null,$uri) . '</a>' . $m[1];
+					$rep = '<a href="' . $uri . '" target="_blank">' . preg_replace('|^https?://|',null,$uri) . '</a>' . $m[1];
 				} else {
-					$rep = '<a href="' . $uri . '">' . preg_replace('|^https?://|',null,$uri) . '</a>';
+					$rep = '<a href="' . $uri . '" target="_blank">' . preg_replace('|^https?://|',null,$uri) . '</a>';
 				}
 				$text = str_replace($tok,$rep,$text);
 			}
