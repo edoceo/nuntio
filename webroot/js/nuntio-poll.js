@@ -80,29 +80,38 @@ nuntio.recv = function(res,ret,xhr)
 	nuntio.stat('warn','<i class="icon-comment" title="recv()"></i>');
 	nuntio.line.enable();
 
-	// Check Response
-	if ('undefined' == typeof res) return;
-	// res has list, then use that
-	if ('undefined' == typeof res.list) return;
-	if (null == res.list) return;
+	// Check Response, Promote Failure to Empty Fakes
+	if ('undefined' == typeof res) {
+		res = {
+			code:100,
+			text:'Internal Response',
+			list:[]
+		};
+	}
+	if ('undefined' == typeof res.list) res.list = [];
+	if (null == res.list)  res.list = [];
 
 	var c = parseInt(res.list.length) || 0;
-	for (var i = 0; i<c; i++) {
+	if (c) {
+		nuntio.beep();
+		for (var i = 0; i<c; i++) {
 
-		var line = res.list[i];
+			var line = res.list[i];
 
-		$('#chat-list').append('<div class="chat-line" id="l' + line._id + '">[' + line.time + '] ' + line.text + '</div>');
-		var x = document.getElementById('chat-list');
-		x.scrollTop = x.scrollHeight;
+			$('#chat-list').append('<div class="chat-line" id="l' + line._id + '">[' + line.time + '] ' + line.text + '</div>');
+			var x = document.getElementById('chat-list');
+			x.scrollTop = x.scrollHeight;
 
-		if (line._id) nuntio.line_id = line._id;
+			if (line._id) nuntio.line_id = line._id;
 
-		// If there is Rich Media in the Line
-		// if (line.rich) {
-		//	 $('#l' + line._id).load('/chat/line',{id:line._id});
-		// }
+			// If there is Rich Media in the Line
+			// if (line.rich) {
+			//	 $('#l' + line._id).load('/chat/line',{id:line._id});
+			// }
+		}
 
 	}
+
 	nuntio.stat('info','<i class="icon-comments-alt" title="ready"></i>');
 }
 

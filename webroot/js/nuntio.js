@@ -10,6 +10,15 @@ var nuntio = {
 	ws:null
 };
 
+/**
+	Just Plays our Audio
+*/
+nuntio.beep = function()
+{
+	var audio = document.getElementById('chat-audio');
+	audio.play();
+}
+
 nuntio.line = {
 	obj:$('#chat-foot textarea')
 };

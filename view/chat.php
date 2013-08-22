@@ -37,6 +37,10 @@
 	<div><button class="warn">Call</button></div>
 	<div><button class="fail">Fail</button></div>
 	<div><pre id="chat-logs"></pre></div>
+	<!-- @see http://www.trekcore.com/audio/ -->
+	<audio id="chat-audio" preload="auto">
+		<source src="http://www.trekcore.com/audio/computer/computerbeep_45.mp3"html>
+	</audio>
 </div>
 
 <script>
