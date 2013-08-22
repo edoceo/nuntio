@@ -19,27 +19,7 @@ nuntio.join = function(n)
 	console.log('nuntio.join(' + n + ')');
 	nuntio.room = n;
 	nuntio.open();
-
-	$('#chat-foot textarea').on('keypress',function(e) {
-		var chord = '';
-		chord += (e.altKey ? 'A' : '-');
-		chord += (e.ctrlKey ? 'C' : '-');
-		chord += (e.shiftKey ? 'S' : '-');
-		switch (chord) {
-		case '-C-':
-			switch (e.keyCode) {
-			case 10:
-			case 13:
-				// Submit Text
-				nuntio.send(nuntio.line.get_clean());
-				e.preventDefault();
-				e.stopPropagation();
-				return false;
-				break;
-			}
-			break;
-		}
-	});
+	nuntio.line.listen();
 }
 
 /**

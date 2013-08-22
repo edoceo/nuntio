@@ -28,6 +28,33 @@ nuntio.line.get_clean = function() {
 	return x;
 }
 
+/**
+	Engage the Event Listener
+*/
+nuntio.line.listen = function() {
+	$('#chat-foot-text').on('keypress',function(e) {
+		var chord = '';
+		chord += (e.altKey ? 'A' : '-');
+		chord += (e.ctrlKey ? 'C' : '-');
+		chord += (e.shiftKey ? 'S' : '-');
+		switch (chord) {
+		case '---':
+			// Naked Enter Key
+			switch (e.keyCode) {
+			case 10:
+			case 13:
+				// Submit Text
+				nuntio.send(nuntio.line.get_clean());
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
+				break;
+			}
+			break;
+		}
+	});
+}
+
 nuntio.do_size = function() {
 
 	var w = $(window).width();
@@ -102,7 +129,7 @@ $(function() {
 
 	// var dz = $('#drop-zone');
 	// var dz = $('#chat-foot');
-	var dz = $('#chat-foot input[type=text]');
+	var dz = $('#chat-foot');
 
     $('body').on('dragenter',function(e) {
 		console.log('nuntio.drag(0)');
