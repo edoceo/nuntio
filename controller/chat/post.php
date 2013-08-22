@@ -136,7 +136,6 @@ default:
     }
     // Nuntio::addLine($line);
     Nuntio::$mdb->insert('chat_line',$msg);
-    $line_list[] = $msg;
     break;
 }
 
