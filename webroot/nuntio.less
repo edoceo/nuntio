@@ -1,5 +1,7 @@
 /**
-   lessc --verbose --compress --strict-math=on nuntio.less
+	:mode=css:noTabs=false:tabSize=4:
+
+	lessc --verbose --compress --strict-math=on nuntio.less
 */
 
 @head_bg_lo: #336699;
@@ -112,6 +114,20 @@ code, kbd, pre {
 	opacity:0.7;
 }
 
+#chat-drop {
+	background:#00f;
+	bottom:0px;
+	color:#fff;
+	font-weight:700;
+	height:32px;
+	opacity:0.7;
+	position:absolute;
+	padding:4px;
+	right:0px;
+	white-space:nowrap;
+	width:200px;
+}
+
 #tool {
 	background:@chat_tool_bg;
 	left:640px;
@@ -129,6 +145,11 @@ code, kbd, pre {
 .drop {
 	background:#f00;
 	outline:2px solid #f00;
+}
+
+div.drop textarea {
+	background:#f00;
+	opacity:0.7;
 }
 
 .exec {

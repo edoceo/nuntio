@@ -145,9 +145,11 @@ $(function() {
 		e.stopPropagation();
     });
 
-    // $('body').on('leave',function() {
-    //     dz.removeClass('drop');
-    // });
+    $('body').on('dragleave',function(e) {
+		dz.removeClass('drop');
+		e.preventDefault();
+		e.stopPropagation();
+    });
     // 
     // $('body').on('mouseout',function() {
     //     dz.removeClass('drop');
@@ -155,27 +157,37 @@ $(function() {
 
     $('body').on('drop',function(e) {
 
-		var data = e.originalEvent.dataTransfer;
-    	// data.dropEffect = 'none';
-    	switch (data.effectAllowed) {
+		var drop = e.originalEvent.dataTransfer;
+    	// drop.dropEffect = 'none';
+    	switch (drop.effectAllowed) {
     	case 'all':
     		break;
     	case 'copyMove':
     		// Text Drop?
-    		var text = data.getData('text/plain');
+    		var text = drop.getData('text/plain');
     		var $x = $('#chat-foot-text');
     		$x.val(text).change();
     		break;
     	}
-    	// data.effectAllowed = 'all';
-    	// data.files = FileList object
-    	// data.items = DataTransferItemList
-    	// data.types = Array
+    	
+    	if (drop.files.length) {
+    		var html = '<div id="chat-drop">';
+    		html += drop.files[0].name;
+    		html += '</div>';
+    		$('#chat-foot').append(html);
+    	}
+    	
+    	// drop.effectAllowed = 'all';
+    	// drop.files = FileList object
+    	// drop.items = DataTransferItemList
+    	// drop.types = Array
 
-//    	var c = data.types.length;
-//    	for (var i=0; i<c; i++) {
-//    		
-//    	}
+    	var c = drop.types.length;
+    	for (var i=0; i<c; i++) {
+    		var t = $('#chat-line-text').val();
+    		t += drop.types[i];
+    		$('#chat-line-text').val(t)
+    	}
 
 		e.preventDefault();
 		e.stopPropagation();
