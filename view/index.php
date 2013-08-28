@@ -8,8 +8,6 @@ echo radix::block('social.php');
 
 ?>
 
-<h1>Nuntio</h1>
-
 <h2>Latin: announce, report, relate, herald, give forth, intimate authoritatively</h2>
 <p>We are building a neat-o Team Media Communication platform.</p>
 
@@ -18,6 +16,23 @@ echo radix::block('social.php');
 <input name="room" placeholder="room" type="text">
 <button class="exec" name="a" value="join">Join</button>
 </form>
+
+<div class="grid">
+<div class="hbox">
+<div class="c4">
+<h3>Simple Messaging</h3>
+</div>
+
+<div class="c4">
+<h3>Rich Media</h3>
+</div>
+
+<div class="c4">
+<h3>Rich Search</h3>
+</div>
+
+</div>
+</div>
 
 
 <h2>Alternatives</h2>
@@ -28,7 +43,7 @@ echo radix::block('social.php');
 <a href="" rel="nofollow">Unison</a>,
 <a href="" rel="nofollow">CoMeeting</a>,
 Yammer,
-S?????,
+<a href="https://slack.com/" rel="nofollow">Slack</a>,
 <a href="https://www.echowaves.com/" rel="nofollow">Echowaves</a>
 </p>
 
@@ -46,4 +61,7 @@ What about chat history?  What about intergration with my Task tracker, Code man
 * Redmine / ChiliProject
 * Jira
 * Bugzilla
+* Github
+* BitBucket
+* &amp;c
 </pre>
