@@ -22,8 +22,8 @@ if (empty($room['_id'])) {
 $msg['room_id'] = $room['_id'];
 $msg['nick'] = 'SVN Hook';
 $msg['text'] = 'Commit: ' . $_POST['youngest'] . ' to ' . $_POST['project'] . ' by ' . $_POST['author'] . '<br>';
-$msg['text'].= '<strong>' . $_POST['log'] . '</strong><br>';
-$msg['text'].= $_POST['changed'];
+$msg['text'].= '<strong>' . trim($_POST['log']) . '</strong><br>';
+$msg['text'].= trim($_POST['changed']);
 // $msg['text'].= '<br>' . print_r($_POST,true);
 
 Nuntio::$mdb->insert('chat_line',$msg);
