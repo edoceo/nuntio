@@ -27,9 +27,11 @@
 
 
 <div id="tool">
+	<h2 style="padding-top:0;">User List</h2>
+	<div id="user-list"></div>
 	<h2>Tools</h2>
-	<h2>User List</h2>
 	<h2>Hashtags</h2>
+	<div id="htag-list"></div>
 	<h2>Attachments</h2>
 	<div><button class="exec">Call</button></div>
 	<div><button class="info">Call</button></div>
@@ -50,4 +52,17 @@ $(window).resize(function() {
 nuntio.do_size();
 nuntio.join('<?php echo $_ENV['room_id']; ?>');
 $('#chat-foot input').focus();
+
+$(function() {
+	setInterval(function() {
+		$.getJSON('/room/stat',{room:nuntio.room},function(res) {
+			if (res.user) {
+				$('#user-list').html(res.user);
+			}
+			if (res.tags) {
+				$('#htag-list').html(res.tags);
+			}
+		});
+	}, 5678);
+});
 </script>
