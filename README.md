@@ -30,3 +30,7 @@ Nuntio is also available as a hosted service, please see http://nunt.io/
 * Headless OpenOffice for Conversion?
 * PhantomJS for Screenshots
 * Automatic Unroller for Short URLs
+* Libreoffice File Converter
+
+/usr/lib/libreoffice/program/soffice.bin --headless --nologo --nofirststartwizard --accept=socket,host=127.0.0.1,port=8100;urp
+/opt/libreoffice3.4/program/soffice --headless --nologo --nofirststartwizard -convert-to $extension.pdf "$1" -outdir $folder
