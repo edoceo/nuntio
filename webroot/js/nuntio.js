@@ -123,6 +123,61 @@ nuntio.stat = function(kind,text) {
 	}
 };
 
+nuntio.upload = function(file_list)
+{
+	if(!window.FileReader){
+		alert('The File API is not supported');
+		return;
+	}
+
+	nuntio.upload_name = file_list[0].name;
+	nuntio.upload_size = file_list[0].size;
+
+	var fr = new FileReader();
+	fr.onload = nuntio.upload_file;
+	fr.readAsBinaryString(file_list[0]);
+
+}
+
+/**
+	Does the Actual Upload via XHR
+*/
+nuntio.upload_file = function(e0)
+{
+	// Extend XHR
+	XMLHttpRequest.prototype.sendAsBinary = function(data)
+	{
+		var byteValue = function(x) {
+			return x.charCodeAt(0) & 0xff;
+		}
+
+		var ords = Array.prototype.map.call(data, byteValue);
+		var ui8a = new Uint8Array(ords);
+
+		try{
+			this.send(ui8a);
+		}catch(error){
+			this.send(ui8a.buffer);
+		}
+	}
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', '/upload?r=' + nuntio.room + '&n=' + nuntio.upload_name, true);
+	xhr.onreadystatechange = function(e1)
+	{
+		if(e1.target.readyState != 4) return;
+		$('#chat-drop').remove();
+		$('#chat-foot').removeClass('drop');
+	}
+
+	xhr.onerror = function(e2)
+	{
+		alert('Error: ' + e2.target.responseText);
+	}
+
+	xhr.sendAsBinary(e0.target.result);
+}
+
 // Interface
 nuntio.join = function() { };
 nuntio.open = function() { };
@@ -166,8 +221,14 @@ $(function() {
 
     $('body').on('drop',function(e) {
 
+		console.log('nuntio.drop(0)');
+
 		var drop = e.originalEvent.dataTransfer;
     	// drop.dropEffect = 'none';
+    	// drop.effectAllowed = 'all';
+    	// drop.files = FileList object
+    	// drop.items = DataTransferItemList
+    	// drop.types = Array
     	switch (drop.effectAllowed) {
     	case 'all':
     		break;
@@ -178,18 +239,14 @@ $(function() {
     		$x.val(text).change();
     		break;
     	}
-    	
+
     	if (drop.files.length) {
-    		var html = '<div id="chat-drop">';
+    		var html = '<div id="chat-drop">Loading: ';
     		html += drop.files[0].name;
     		html += '</div>';
     		$('#chat-foot').append(html);
+    		nuntio.upload(drop.files);
     	}
-    	
-    	// drop.effectAllowed = 'all';
-    	// drop.files = FileList object
-    	// drop.items = DataTransferItemList
-    	// drop.types = Array
 
     	var c = drop.types.length;
     	for (var i=0; i<c; i++) {
