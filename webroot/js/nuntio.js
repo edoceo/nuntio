@@ -20,6 +20,8 @@ nuntio.beep = function()
 }
 
 nuntio.line = {
+	history:[],
+	history_idx:0,
 	obj:$('#chat-foot textarea')
 };
 nuntio.line.disable = function() {
@@ -39,9 +41,10 @@ nuntio.line.get_clean = function() {
 
 /**
 	Engage the Event Listener
+	@see http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
 */
 nuntio.line.listen = function() {
-	$('#chat-foot-text').on('keypress',function(e) {
+	$('#chat-foot-text').on('keydown',function(e) {
 		var chord = '';
 		chord += (e.altKey ? 'A' : '-');
 		chord += (e.ctrlKey ? 'C' : '-');
@@ -53,10 +56,26 @@ nuntio.line.listen = function() {
 			case 10:
 			case 13:
 				// Submit Text
-				nuntio.send(nuntio.line.get_clean());
+				var t = nuntio.line.get_clean();
+				nuntio.send(t);
+				nuntio.line.history_idx = 0;
+				nuntio.line.history.push(t);
 				e.preventDefault();
 				e.stopPropagation();
 				return false;
+				break;
+			case 33: // Page Up
+				// Scroll Room
+				break;
+			case 34: // Page Dn
+				break;
+			case 38: // Up Arrow
+				$('#chat-foot-text').val(nuntio.line.history[nuntio.line.history_idx]);
+				nuntio.line.history_idx++;
+				break;
+			case 40: // Down Arrow
+				nuntio.line.history_idx--;
+				$('#chat-foot-text').val(nuntio.line.history[nuntio.line.history_idx]);
 				break;
 			}
 			break;
