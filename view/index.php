@@ -8,8 +8,8 @@ echo radix::block('social.php');
 
 ?>
 
-<h2>Latin: announce, report, relate, herald, give forth, intimate authoritatively</h2>
-<p>We are building a neat-o Team Media Communication platform.</p>
+<h2>Nuntio: Latin: announce, report, relate, herald, give forth, intimate authoritatively</h2>
+<p>Nuntio is a multimedia team communication platform.</p>
 
 <form action="/chat/join" method="post">
 <input name="user" placeholder="username (email)" type="text">
@@ -53,7 +53,6 @@ Yammer,
 These tools that offer group chat are great, but what about when folks are off-line?
 What about chat history?  What about intergration with my Task tracker, Code manager or Wiki?
 </p>
-
 
 <h2>Task Management Tools</h2>
 <pre>
