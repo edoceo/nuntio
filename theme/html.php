@@ -12,7 +12,7 @@ echo "<html>\n";
 ?>
 <head>
 <title>Nuntio - Simplified Development Team Communications</title>
-<script src="//gcdn.org/jquery/1.10.1/jquery.js" type="text/javascript"></script>
+<script src="//gcdn.org/jquery/1.10.2/jquery.js" type="text/javascript"></script>
 <script src="/js/nuntio.js" type="text/javascript"></script>
 <?php
 if (!empty($_ENV['use-websocket'])) {
