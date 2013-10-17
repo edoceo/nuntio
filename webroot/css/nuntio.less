@@ -7,6 +7,8 @@
 @head_bg_lo: #336699;
 @head_bg_hi: #7db9e8;
 
+@foot_bg: #3161ce;
+
 @chat_head_bg: #333333;
 @chat_head_fg: #e0e0e0;
 
@@ -47,6 +49,12 @@ header nav ul li {
 header nav ul li a {
 	font-size:24px;
 	padding:4px 8px;
+}
+footer {
+	background: @foot_bg;
+	color:#fff;
+	font-weight:700;
+	padding:8px;
 }
 code, kbd, pre {
 	font-family:monospace;
@@ -114,18 +122,25 @@ code, kbd, pre {
 	opacity:0.7;
 }
 
-#chat-drop {
-	background:#00f;
+#drop-stat {
+	background:#333;
 	bottom:0px;
-	color:#fff;
 	font-weight:700;
 	height:32px;
-	opacity:0.7;
 	position:absolute;
 	padding:4px;
 	right:0px;
 	white-space:nowrap;
 	width:200px;
+}
+#drop-load {
+	background:#0c0;
+	opacity:0.4;
+	height:100%;
+	position:absolute;
+	left:0;
+	top:0;
+	width:4px;
 }
 
 #tool {
@@ -143,13 +158,7 @@ code, kbd, pre {
 }
 
 .drop {
-	background:#f00;
-	outline:2px solid #f00;
-}
-
-div.drop textarea {
-	background:#f00;
-	opacity:0.7;
+	outline:2px dashed #f00;
 }
 
 .exec {

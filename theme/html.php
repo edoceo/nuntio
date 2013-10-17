@@ -23,7 +23,7 @@ if (!empty($_ENV['use-websocket'])) {
 ?>
 <link href="http://radix.edoceo.com/css/radix.css" rel="stylesheet">
 <link href="//gcdn.org/font-awesome/3.2.1/font-awesome.css" rel="stylesheet">
-<link href="/nuntio.css" rel="stylesheet">
+<link href="/css/nuntio.css" rel="stylesheet">
 </head>
 
 <body>
@@ -57,7 +57,8 @@ echo $this->body;
 </div>
 
 <footer>
-<a href="http://nunt.io/">Nuntio</a> built by <a href="http://edoceo.com/">edoceo</a>.
+<p><a href="http://nunt.io/">Nuntio</a> is &copy; 2013 <a href="http://edoceo.com/">edoceo</a>.</p>
+<p>Code is freely available <a href="https://github.com/edoceo/nuntio">github.com/edoceo/nuntio</a>.</p>
 </footer>
 
 </body>
