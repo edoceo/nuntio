@@ -1,6 +1,6 @@
 <?php
 /**
-	Specify this Hook as http://nunt.io/hook/git?room=ROOM_ID
+	Specify this Hook as http://nunt.io/hook/git?r=ROOM_ID
 
 	Git Hook
 	github, gitorious, bitbucket
@@ -11,7 +11,11 @@
 
 namespace Nuntio;
 
-$room = Nuntio::getRoom($_GET['room']);
+if (empty($_GET['r'])) {
+	$_GET['r'] = $_GET['room'];
+}
+
+$room = Nuntio::getRoom($_GET['r']);
 if (empty($room['_id'])) {
 	header('HTTP/1.1 400 Invalid Room');
 	die('Invalid Room');
@@ -33,12 +37,12 @@ $buf = array();
 foreach ($push['commits'] as $c) {
 	$buf += $c['added'];
 }
-if (count($buf)) $msg['text'].= 'Added: ' . implode(', ',$buf);
+if (count($buf)) $msg['text'].= 'Added: ' . implode('<br>',$buf);
 
 // Modified Files
 $msg['text'].= 'Modified: ';
 foreach ($push['commits'] as $c) {
-	$msg['text'].= implode(', ',$c['modified']);
+	$msg['text'].= implode('<br>',$c['modified']);
 }
 $msg['text'].= '<br>';
 
@@ -47,7 +51,7 @@ $buf = array();
 foreach ($push['commits'] as $c) {
 	$buf += $c['removed'];
 }
-if (count($buf)) $msg['text'].= 'Removed: ' . implode(', ',$buf);
+if (count($buf)) $msg['text'].= 'Removed: ' . implode('<br>',$buf);
 
 Nuntio::$mdb->insert('chat_line',$msg);
 

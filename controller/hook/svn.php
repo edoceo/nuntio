@@ -1,6 +1,6 @@
 <?php
 /**
-	Specify this Hook as http://nunt.io/hook/svn?room=ROOM_ID
+	Specify this Hook as http://nunt.io/hook/svn?r=ROOM_ID
 
 	SVN Hook
 	Cloudforge 
@@ -12,8 +12,11 @@
 namespace Nuntio;
 
 // if ([HTTP_USER_AGENT] => CloudForge Notifier/1.1)
+if (empty($_GET['r'])) {
+	$_GET['r'] = $_GET['room'];
+}
 
-$room = Nuntio::getRoom($_GET['room']);
+$room = Nuntio::getRoom($_GET['r']);
 if (empty($room['_id'])) {
 	header('HTTP/1.1 400 Invalid Room');
 	die('Invalid Room');
