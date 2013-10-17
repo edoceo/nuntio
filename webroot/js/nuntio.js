@@ -181,11 +181,24 @@ nuntio.upload_file = function(e0)
 	}
 
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', '/upload?r=' + nuntio.room + '&n=' + nuntio.upload_name, true);
+	xhr.open('PUT', '/file/upload?r=' + nuntio.room + '&n=' + nuntio.upload_name, true);
+	xhr.upload.onprogress = function(e) {
+		if (e.lengthComputable) {
+			var pct = ( Math.round(e.loaded / e.total * 100) * 2 );
+			$('#drop-load').css({width:pct});
+		}
+		console.log('xhr.upload()');
+	};
+// file.xhr.upload.onprogress = function(event) {
+//                     if(event.lengthComputable) {
+//                         file.uploadPercent = Math.round(event.loaded / event.total * 100);
+//                     }
+//                 };	
 	xhr.onreadystatechange = function(e1)
 	{
+		console.log('xhr.onreadystatechange()');
 		if(e1.target.readyState != 4) return;
-		$('#chat-drop').remove();
+		$('#drop-stat').remove();
 		$('#chat-foot').removeClass('drop');
 	}
 
@@ -260,7 +273,7 @@ $(function() {
     	}
 
     	if (drop.files.length) {
-    		var html = '<div id="chat-drop">Loading: ';
+    		var html = '<div id="drop-stat"><div id="drop-load"></div>';
     		html += drop.files[0].name;
     		html += '</div>';
     		$('#chat-foot').append(html);
